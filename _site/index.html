@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="ASAP: Aligning Simulation and Real-World Physics for Learning Agile Humanoid Whole-Body Skills">
+  <meta name="keywords" content="Robotics, Quadruped, Whole-body Control, Whole-body Manipulation">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    ASAP: Aligning Simulation and Real-World Physics for Learning Agile Humanoid Whole-Body Skills
+  </title>
+
+  <!-- <link rel="apple-touch-icon" sizes="57x57"s
+    href="./static/images/cr7_frame5_crop.png" />
+
+  <link rel="icon" type="image/png" href="./static/images/cr7_frame5_crop.png"
+    sizes="196x196" />
+  <link rel="icon" type="image/png" href="./static/images/cr7_frame5_crop.png"
+    sizes="192x192" />
+  <link rel="icon" type="image/png" href="./static/images/cr7_frame5_crop.png" sizes="128x128" />
+  <link rel="icon" type="image/png" href="./static/images/cr7_frame5_crop.png" sizes="96x96" />
+  <link rel="icon" type="image/png" href="./static/images/cr7_frame5_crop.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="./static/images/cr7_frame5_crop.png" sizes="16x16" />
+
+  <link rel="mask-icon" href="//www-media.stanford.edu/assets/favicon/safari-pinned-tab.svg" color="#ffffff">
+  <meta name="application-name" content="Stanford University" />
+  <meta name="msapplication-TileColor" content="#FFFFFF" />
+  <meta name="msapplication-TileImage" content="//www-media.stanford.edu/assets/favicon/mstile-144x144.png" />
+  <meta name="msapplication-square70x70logo" content="//www-media.stanford.edu/assets/favicon/mstile-70x70.png" />
+  <meta name="msapplication-square150x150logo" content="//www-media.stanford.edu/assets/favicon/mstile-150x150.png" />
+  <meta name="msapplication-square310x310logo" content="//www-media.stanford.edu/assets/favicon/mstile-310x310.png" /> -->
+
+  <link rel="icon" href="./static/images/CR7_frame5_ico_png_crop.png">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QZ38WT2YPD"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-QZ38WT2YPD');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://kit.fontawesome.com/19914a84eb.js" crossorigin="anonymous"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+<section class="hero is-link is-fullheight video" style="overflow: hidden; position:relative;">
+  <div class="hero-video" style="height: 100%; width: 177.77777778vh; min-width: 100%;min-height: 56.25vw;">
+    <video playsinline autoplay muted loop>
+      <source src=" ./static/videos/ASAP-Video-Website-Hero-16-9-4K-mp4-1080P.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-video is-hidden-tablet is-inline-block-mobile"
+    style="height: 154.28571428vw; width: 100%; min-width:64.81481481vh;min-height:100%;">
+    <video playsinline autoplay muted loop>
+      <source src=" ./static/videos/ASAP-Video-Website-Hero-9-16-4K-1080P.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="overlay"></div>
+  <!-- Hero head: will stick at the top -->
+  <div class="hero-head is-hidden-mobile">
+    <header class="navbar">
+      <div class="container is-size-5">
+        <div class="navbar-menu">
+          <div class="navbar-end">
+            <a class="navbar-item pl-4 pr-4" href="./static/asap.pdf">
+              <span class="icon" style="margin-right:5px;">
+                <img src="./static/images/pdf.svg" alt="PDF" />
+              </span>
+              <span>Paper</span>
+            </a>
+            <a class="navbar-item  pl-4 pr-4" href="https://agile.human2humanoid.com">
+              <span class="icon" style="margin-right:5px;">
+                <img src="./static/images/arxiv.svg" alt="ArXiv" />
+              </span>
+              <span>arXiv</span> </a>
+            <a href="https://agile.human2humanoid.com" class="navbar-item  pl-4 pr-4">
+              <span class="icon" style="margin-right:5px;">
+                <img src="./static/images/youtube.svg" alt="Youtube" />
+              </span>
+              <span>Video</span> </a>
+            <span class="navbar-item  pl-4 pr-4">
+              <a href="https://github.com/LeCAR-Lab/ASAP" class="button is-inverted is-large">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <!-- Hero content: will be in the middle -->
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title is-1 publication-title is-size-1-mobile" style="font-size: 6rem;">
+        ASAP
+      </h1>
+      <h1 class="subtitle is-1 publication-title is-size-4-mobile" style="font-size: 4rem;">
+        Aligning Simulation and Real-World Physics for Learning Agile Humanoid Whole-Body Skills
+      </h1>
+      <!-- <h1 class="is-2 is-italic is-size-4-mobile" style="font-size: 2rem; opacity: 80%;">
+        Conference on Robot Learning 2024
+      </h1>
+      <h1 class="is-2 is-italic is-size-4-mobile" style="font-size: 1.5rem; opacity: 80%;">
+        <b>Spotlight</b> WCBM Workshop CoRL 2024
+      </h1>
+      <h1 class="is-2 is-italic is-size-4-mobile" style="font-size: 1.5rem; opacity: 80%;">
+        X-Embodiment Workshop CoRL 2024
+      </h1> -->
+      <div class="column has-text-centered is-hidden-tablet">
+        <div class="publication-links">
+          <!-- PDF Link. -->
+          <span class="link-block">
+            <a href="./static/asap.pdf" class="external-link button is-normal is-rounded is-dark">
+              <span class="icon">
+                <img src="./static/images/pdf.svg" alt="PDF" />
+              </span>
+              <span>Paper</span>
+            </a>
+          </span>
+          <span class="link-block">
+            <a href="https://agile.human2humanoid.com" class="external-link button is-normal is-rounded is-dark">
+              <span class="icon">
+                <img src="./static/images/arxiv.svg" alt="ArXiv" />
+              </span>
+              <span>arXiv</span>
+            </a>
+          </span>
+          <!-- Video Link. -->
+          <span class="link-block">
+            <a href="https://agile.human2humanoid.com" class="external-link button is-normal is-rounded is-dark">
+              <span class="icon">
+                <img src="./static/images/youtube.svg" alt="Youtube" />
+              </span>
+              <span>Video</span>
+            </a>
+          </span>
+          <!-- Code Link. -->
+          <span class="link-block">
+            <a href="https://github.com/LeCAR-Lab/ASAP"
+              class="external-link button is-normal is-rounded is-dark">
+              <span class="icon">
+                <i class="fab fa-github"></i>
+              </span>
+              <span>Code</span>
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Hero footer: will stick at the bottom -->
+  <!-- <div class="hero-foot is-hidden-mobile">
+    <nav class="tabs is-boxed is-fullwidth is-size-4">
+      <ul>
+        <li><a href="#agile-skills">Agile Whole-Body Skills</a></li>
+        <li><a href="#before-after-asap"></a>Before/After ASAP Fine-tuning</a></li>
+        <li><a href="#abstract">Abstract</a></li>
+        <li><a href="#method">Method</a></li>
+      </ul>
+    </nav>
+  </div> -->
+</section>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">ASAP: Aligning Simulation and Real-World Physics for Learning Agile Humanoid Whole-Body Skills</h1>
+
+          <!-- <div class="is-size-4 publication-authors">
+            <span class="author-block" style="font-size: 95%;">
+              <a href="https://tairanhe.com/">Tairan He</a>*&nbsp;&nbsp;
+              <a href="https://www.zhengyiluo.com/">Zhengyi Luo</a>*&nbsp;&nbsp;
+              <a href="https://xialin-he.github.io/">Xialin He</a>*&nbsp;&nbsp;
+              <a href="https://wenlixiao-cs.github.io/">Wenli Xiao</a>&nbsp;&nbsp;
+              <a href="https://zita-ch.github.io/">Chong Zhang</a>&nbsp;&nbsp;
+            </span>
+          </div>
+
+          <div class="is-size-4 publication-authors">
+            <span class="author-block" style="font-size: 95%;">
+              <a href="https://wnzhang.net/">Weinan Zhang</a>&nbsp;&nbsp;
+              <a href="https://kriskitani.github.io/">Kris Kitani</a>&nbsp;&nbsp;
+              <a href="https://www.cs.cmu.edu/~cliu6/">Changliu Liu</a>&nbsp;&nbsp;
+              <a href="https://www.gshi.me/">Guanya Shi</a>&nbsp;&nbsp;
+            </span>
+          </div> -->
+
+          <div class="is-size-4 publication-authors">
+            <span class="author-block" style="font-size: 95%;">
+              <a href="https://tairanhe.com/">Tairan He</a>*&nbsp;&nbsp;
+              <a href="https://gao-jiawei.com">Jiawei Gao</a>*&nbsp;&nbsp;
+              <a href="https://wenlixiao-cs.github.io">Wenli Xiao</a>*&nbsp;&nbsp;
+              <a href="https://hang0610.github.io">Yuanhang Zhang</a>*&nbsp;&nbsp;
+              <a href="https://www.linkedin.com/in/zi-wang-b675aa236">Zi Wang</a>&nbsp;&nbsp;
+              <a href="https://jiashunwang.github.io">Jiashun Wang</a>&nbsp;&nbsp;
+              <br>
+              <a href="https://www.zhengyiluo.com/">Zhengyi Luo</a>&nbsp;&nbsp;
+              <a href="https://guanqihe.github.io">Guanqi He</a>&nbsp;&nbsp;
+              <a href="https://nike353.github.io">Nikhil Sobanbabu</a>&nbsp;&nbsp;
+              <a href="https://panchaoyi.com">Chaoyi Pan</a>&nbsp;&nbsp;
+              <a href="https://iscoyizj.github.io">Zeji Yi</a>&nbsp;&nbsp;
+              <a href="https://www.guannanqu.com">Guannan Qu</a>&nbsp;&nbsp;
+              <br>
+              <a href="https://kriskitani.github.io/">Kris Kitani</a>&nbsp;&nbsp;
+              <a href="https://www.cs.cmu.edu/~jkh/">Jessica Hodgins</a>&nbsp;&nbsp;
+              <a href="https://jimfan.me">Linxi "Jim" Fan</a>&nbsp;&nbsp;
+              <a href="https://yukezhu.me">Yuke Zhu</a>&nbsp;&nbsp;
+              <a href="https://www.cs.cmu.edu/~cliu6/">Changliu Liu</a>&nbsp;&nbsp;
+              <a href="https://www.gshi.me/">Guanya Shi</a>&nbsp;&nbsp;
+            </span>
+          </div>
+
+          <div class="column">
+            <image src="./static/images/CMU-NV-logo-crop-png.png" style="width: 60%;"></image>
+         </div>
+
+
+          <!-- <div class="is-size-4 publication-authors", style="margin-bottom: 0.5cm;">
+            CoRL 2024
+          </div> -->
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="./static/asap.pdf"
+                   class="external-link button is-normal is-rounded is-dark" target="_blank">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>PDF</span>
+                </a>
+              </span>
+              <!-- arXiv Link. -->
+              <span class="link-block">
+                <a href="https://agile.human2humanoid.com"
+                   class="external-link button is-normal is-rounded is-dark" target="_blank">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>ArXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://agile.human2humanoid.com"
+                   class="external-link button is-normal is-rounded is-dark" target="_blank">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Datasets Link. -->
+              <!-- <span class="link-block">
+                <a href="https://cmu.box.com/s/kmayzq5ax2rxvwn97s0hzz0aq5vws9io" class="external-link button is-normal is-rounded is-dark" target="_blank">
+                  <span class="icon">
+                      <i class="fas fa-database"></i>
+                  </span>
+                  <span>Datasets</span>
+                </a>
+              </span> -->
+              <!-- twitter Link. -->
+              <span class="link-block">
+                <a href="https://x.com/TairanHe99/"
+                   class="external-link button is-normal is-rounded is-dark" target="_blank">
+                  <span class="icon">
+                      <i class="fab fa-twitter"></i>
+                  </span>
+                  <span>Summary</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/LeCAR-Lab/ASAP" class="external-link button is-normal is-rounded is-dark" target="_blank">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">Agile Whole-body Skills</h2>
+        <tr>
+          <td>
+
+            <div class="columns"> <!-- Correct Bulma structure -->
+              <div class="column">
+                <h3 class="title is-3" style="text-align: center; margin-bottom: 10px; font-size: x-large;">Cristiano Ronaldo</h3>
+                <video autoplay muted loop playsinline controls src="./static/videos/ASAP-Motion-CR7_level1-1080P.mp4" width="100%" style="border-radius:10px;"></video>
+              </div>
+              <div class="column">
+                <h3 class="title is-3" style="text-align: center; margin-bottom: 10px; font-size: x-large;">Kobe Bryant</h3>
+                <video autoplay muted loop playsinline controls src="./static/videos/ASAP-Motion-Kobe-1080P.mp4" width="100%" style="border-radius:10px;"></video>
+              </div>
+            </div>
+            <br>
+
+
+            <div class="columns"> <!-- Correct Bulma structure -->
+              <div class="column">
+                <h3 class="title is-3" style="text-align: center; margin-bottom: 10px; font-size: x-large;">LeBron James</h3>
+                <video autoplay muted loop playsinline controls src="./static/videos/ASAP-Motion-LeBron-level2-1080P.mp4" width="100%" style="border-radius:10px;"></video>
+              </div>
+              <div class="column">
+                <h3 class="title is-3" style="text-align: center; margin-bottom: 10px; font-size: x-large;">Side Jump (1.3m)</h3>
+                <video autoplay muted loop playsinline controls src="./static/videos/ASAP-Motion-SideJump_level3-1080P.mp4" width="100%" style="border-radius:10px;"></video>
+              </div>
+            </div>
+            <br>
+
+            <div class="columns"> <!-- Correct Bulma structure -->
+              <div class="column">
+                <h3 class="title is-3" style="text-align: center; margin-bottom: 10px; font-size: x-large;">Jump Forward (0.85m)</h3>
+                <video autoplay muted loop playsinline controls src="./static/videos/ASAP-Motion-JumpForward-Level2-1080P.mp4" width="100%" style="border-radius:10px;"></video>
+              </div>
+              <div class="column">
+                <h3 class="title is-3" style="text-align: center; margin-bottom: 10px; font-size: x-large;">Jump Forward (1.5m)</h3>
+                <video autoplay muted loop playsinline controls src="./static/videos/ASAP-Motion-JumpForward-Level3-1080P.mp4" width="100%" style="border-radius:10px;"></video>
+              </div>
+            </div>
+            <br>
+
+            <div class="columns"> <!-- Correct Bulma structure -->
+              <div class="column">
+                <h3 class="title is-3" style="text-align: center; margin-bottom: 10px; font-size: x-large;">Forward Kick</h3>
+                <video autoplay muted loop playsinline controls src="./static/videos/ASAP-Motion-Kick_level2-1080P.mp4" width="100%" style="border-radius:10px;"></video>
+              </div>
+              <div class="column">
+                <h3 class="title is-3" style="text-align: center; margin-bottom: 10px; font-size: x-large;">Right Kick</h3>
+                <video autoplay muted loop playsinline controls src="./static/videos/ASAP-Motion-Kick_level3-1080P.mp4" width="100%" style="border-radius:10px;"></video>
+              </div>
+            </div>
+            <br>
+            <div class="columns"> <!-- Correct Bulma structure -->
+              <div class="column">
+                <h3 class="title is-3" style="text-align: center; margin-bottom: 10px; font-size: x-large;">APT Dance</h3>
+                <video autoplay muted loop playsinline controls src="./static/videos/ASAP-Motion-APT-1080P.mp4" width="100%" style="border-radius:10px;"></video>
+              </div>
+              <div class="column">
+                <h3 class="title is-3" style="text-align: center; margin-bottom: 10px; font-size: x-large;">Leg Stretch</h3>
+                <video autoplay muted loop playsinline controls src="./static/videos/ASAP-Motion-StepForwardBackward_level2-1080P.mp4" width="100%" style="border-radius:10px;"></video>
+              </div>
+            </div>
+            <br>
+
+          </td>
+        </tr>
+      </div> 
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">Before/After ASAP Fine-tuning</h2>
+        <tr>
+          <td>
+
+            <div class="columns"> <!-- Correct Bulma structure -->
+              <div class="column">
+                <h3 class="title is-3" style="text-align: center; margin-bottom: 10px; font-size: x-large;">Kick (Before ASAP)</h3>
+                <video autoplay muted loop playsinline controls src="./static/videos/ASAP-Website-Kick-BeforeASAP-1080P.mp4" width="100%" style="border-radius:10px;"></video>
+              </div>
+              <div class="column">
+                <h3 class="title is-3" style="text-align: center; margin-bottom: 10px; font-size: x-large;">Kick (After ASAP)</h3>
+                <video autoplay muted loop playsinline controls src="./static/videos/ASAP-Website-Kick-AfterASAP-1080P.mp4" width="100%" style="border-radius:10px;"></video>
+              </div>
+            </div>
+            <br>
+
+
+            <div class="columns"> <!-- Correct Bulma structure -->
+              <div class="column">
+                <h3 class="title is-3" style="text-align: center; margin-bottom: 10px; font-size: x-large;">LeBron James (Before ASAP)</h3>
+                <video autoplay muted loop playsinline controls src="./static/videos/ASAP-Website-LeBron-BeforeASAP-1080P.mp4" width="100%" style="border-radius:10px;"></video>
+              </div>
+              <div class="column">
+                <h3 class="title is-3" style="text-align: center; margin-bottom: 10px; font-size: x-large;">LeBron James (After ASAP)</h3>
+                <video autoplay muted loop playsinline controls src="./static/videos/ASAP-Website-LeBron-AfterASAP-1080P.mp4" width="100%" style="border-radius:10px;"></video>
+              </div>
+            </div>
+
+
+          </td>
+        </tr>
+      </div> 
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-two-thirds">
+        <h2 class="title is-2">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Humanoid robots hold the potential for unparalleled versatility for performing human-like, whole-body skills. However, achieving agile and coordinated whole-body motions remains a significant challenge due to the dynamics mismatch between simulation and the real world. Existing approaches, such as system identification (SysID) and domain randomization (DR) methods, often rely on labor-intensive parameter tuning or result in overly conservative policies that sacrifice agility. In this paper, we present <span class="method" style="color: darkred;">ASAP</span> (Aligning Simulation and Real Physics), a two-stage framework designed to tackle the dynamics mismatch and enable agile humanoid whole-body skills.
+        </p>
+        <p>
+            In the first stage, we pre-train motion tracking policies in simulation using retargeted human motion data. In the second stage, we deploy the policies in the real world and collect real-world data to train a delta (residual) action model that compensates for the dynamics mismatch. Then, <span class="method" style="color: darkred;">ASAP</span> fine-tunes pre-trained policies with the delta action model integrated into the simulator to align effectively with real-world dynamics. We evaluate <span class="method" style="color: darkred;">ASAP</span> across three transfer scenarios—IsaacGym to IsaacSim, IsaacGym to Genesis, and IsaacGym to the real-world Unitree G1 humanoid robot. Our approach significantly improves agility and whole-body coordination across various dynamic motions, reducing tracking error compared to SysID, DR, and delta dynamics learning baselines.
+        </p>
+        <p>
+            <span class="method" style="color: darkred;">ASAP</span> enables highly agile motions that were previously difficult to achieve, demonstrating the potential of delta action learning in bridging simulation and real-world dynamics. These results suggest a promising sim-to-real direction for developing more expressive and agile humanoids.
+        </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container">
+    <h2 class="title is-2" style="text-align: center;">Method</h2>
+    <!-- <h2 class="title is-4" style="text-align: center;">Stage 1: RL Pre-training with Soft Dynamics Constraints</h2>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-two-thirds">
+        <div class="content has-text-justified">
+          <p>
+            In the RL pre-training stage, we allow robots to penetrate obstacles using an automatic curriculum that enforces soft dynamics constraints. This encourages robots to gradually learn to overcome these obstacles while minimizing penetrations. 
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-three-fifths is-centered has-text-centered">
+        <video controls autoplay loop muted playsinline src="./resources/method/soft-dyanmics.mp4" poster="./resources/loading-icon.gif" style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%;"></video>
+      </div>
+    </div>
+    <h2 class="title is-4" style="text-align: center;">Stage 2: RL Fine-tuning with Hard Dynamics Constraints</h2>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-two-thirds">
+        <div class="content has-text-justified">
+          <p>
+            In the RL fine-tuning stage, we enforce all dynamics constraints and fine-tune the behaviors learned in the pre-training stage with realistic dynamics.         </p>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-three-fifths is-centered has-text-centered">
+        <video controls autoplay loop muted playsinline src="./resources/method/hard-dynamics.mp4" poster="./resources/loading-icon.gif" style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%;"></video>
+      </div>
+    </div> -->
+    <!-- <h2 class="title is-4" style="text-align: center;">Training Framework</h2> -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-three-thirds">
+        <div class="content has-text-justified">
+          <ol type="a">
+            There are four steps within the <span class="method" style="color: darkred;">ASAP</span> framework:
+              <ol>
+                <li><strong>Motion Tracking Pre-training and Real Trajectory Collection</strong>:  <br>With the humanoid motions retargeted from human videos, we pre-train multiple motion tracking policies to roll out real-world trajectories;</li>
+                <li><strong>Delta Action Model Training</strong><br> Based on the real-world rollout data, we train the delta action model by minimizing the discrepancy between simulation state <code>s_t</code> and real-world state <code>s^r_t</code>;</li>
+                <li><strong>Policy Fine-tuning</strong><br> We freeze the delta action model, incorporate it into the simulator to align the real-world physics and then fine-tune the pre-trained motion tracking policy;</li>
+                <li><strong>Real-World Deployment</strong><br> Finally, we deploy the fine-tuned policy directly in the real world without the delta action model.</li>
+              </ol>
+        </div>
+      </div>
+    </div>
+    
+    <div class="columns is-centered">
+      <div class="column is-four-fifth">
+        <img src="./static/images/ASAP_pipeline-crop.png" alt="" style="width: 100%;" />
+      </div>
+    </div>
+
+
+
+
+    <section class="section" id="BibTeX">
+      <div class="container content">
+        <h2 class="titile">BibTeX</h2>
+        <pre><code>@article{he2024asap,
+        author = {He, Tairan and Gao, Jiawei and Xiao, Wenli and Zhang, Yuanhang and Wang, Zi and Wang, Jiashun and Luo, Zhengyi and He, Guanqi and Sobanbabu, Nikhil and Pan, Chaoyi and Yi, Zeji and Qu, Guannan and Kitani, Kris and Hodgins, Jessica and Fan, Linxi "Jim" and Zhu, Yuke and Liu, Changliu and Shi, Guanya},
+        title     = {ASAP: Aligning Simulation and Real-World Physics for Learning Agile Humanoid Whole-Body Skills},
+        booktitle = {arXiv preprint},
+        year      = {2025},
+    }</code></pre>
+      </div>
+    </section>
+
+
+
+    <footer class="footer">
+      <div class="container">
+        <div class="content has-text-centered">
+          <p>Page template borrowed from <a href="https://nerfies.github.io/"><span class="dnerf">Nerfies</span></a> and <a href="https://umi-on-legs.github.io"><span class="dnerf">UMI-On-Legs</span></a>.</p>
+        </div>
+      </div>
+    </footer>
+
+</body>
+
+</html>
